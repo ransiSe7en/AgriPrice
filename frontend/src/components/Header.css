@@ -1,0 +1,48 @@
+/* src/components/Header.css */
+.header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 20px;
+   background-color: #cfdd66;
+   /* background-color: #90ad01; */
+   /* background-color: #e4d00a; */
+   /* background-color: #009a4e; */
+   /* font-size: 50px; */
+   height: 10vh;
+}
+
+.logo {
+   display: flex;
+   font-size: 25px;
+   font-family: "bubblegum", sans-serif;
+   letter-spacing: 1px;
+   text-shadow: 2px 2px 4px rgba(255, 255, 255, 1);
+}
+
+.header .logo img {
+   height: 100px; /* Adjust as needed */
+}
+
+.header nav ul {
+   display: flex;
+   list-style-type: none;
+}
+
+.header nav ul li {
+   margin-left: 20px;
+}
+
+.header nav ul li a {
+   color: #000;
+   text-decoration: none;
+   font-size: 20px;
+   font-family: "bubblegum", sans-serif;
+   font-weight: 300;
+   letter-spacing: 1px;
+   text-shadow: 2px 2px 4px rgba(255, 255, 255, 1);
+}
+
+.header nav ul li a:hover {
+   text-decoration: underline;
+}

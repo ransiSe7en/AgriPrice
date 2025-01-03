@@ -1,0 +1,32 @@
+.hero {
+   position: relative;
+   background-image: url("https://themezinho.net/seodo/images/slide03.jpg");
+   background-size: cover;
+   background-position: center;
+   color: white;
+   text-align: center;
+   height: 90vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+.heroHeading {
+   font-size: 70px;
+   margin-bottom: 10px;
+   text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
+.heroText {
+   font-size: 30px;
+   margin-top: 0px;
+   text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
+.cta-btn {
+   padding: 10px 20px;
+   background-color: #cfdd66;
+   color: #000;
+   border: none;
+   cursor: pointer;
+   font-size: 20px;
+   letter-spacing: 1px;
+}

@@ -1,39 +1,10 @@
 @font-face {
-   font-family: "Oduda";
-   src: url("./assets/fonts/Oduda-Bold.otf") format("opentype");
-}
-
-/* src/components/Header.css */
-.header {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   padding: 20px;
-   background-color: #000;
-}
-
-.header .logo img {
-   height: 50px; /* Adjust as needed */
-}
-
-.header nav ul {
-   display: flex;
-   list-style-type: none;
-}
-
-.header nav ul li {
-   margin-left: 20px;
-}
-
-.header nav ul li a {
-   color: white;
-   text-decoration: none;
-   font-size: 18px;
-   font-weight: bold;
-}
-
-.header nav ul li a:hover {
-   text-decoration: underline;
+   font-family: "bubblegum";
+   src: url("../assets/fonts/bubblegumsans-regular-webfont.woff2")
+         format("woff2"),
+      url("../assets/fonts/bubblegumsans-regular-webfont.woff") format("woff");
+   font-weight: normal;
+   font-style: normal;
 }
 
 /* .hero {
@@ -50,13 +21,13 @@
 
 .hero {
    position: relative;
-   background-image: url("https://media.istockphoto.com/id/697038252/photo/food-market-marmaris-turkey-seasonal-vegetables-and-fruits-in-may.jpg?s=2048x2048&w=is&k=20&c=PlbsACCQEWIY4aGfPkis1SOcS2TEQYM_LtpOoeiNpQg=");
+   background-image: url("https://themezinho.net/seodo/images/slide03.jpg");
    background-size: cover;
    background-position: center;
    color: white;
    text-align: center;
-   padding: 50px;
-   height: 80vh;
+   padding: 0px;
+   height: 90vh;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -79,18 +50,32 @@
    z-index: 2;
 }
 
+.heroHeading {
+   font-size: 70px;
+   margin-bottom: 10px;
+   text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
+
+.heroText {
+   font-size: 30px;
+   margin-top: 0px;
+   text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
+
 .home {
    overflow-x: hidden;
-   font-family: "Oduda-Bold", sans-serif;
+   font-family: "bubblegum", sans-serif;
 }
 
 .cta-btn {
    padding: 10px 20px;
-   background-color: #fff;
-   color: #4caf50;
+   background-color: #cfdd66;
+   color: #000;
    border: none;
    cursor: pointer;
-   font-size: 16px;
+   font-size: 20px;
+   font-family: "bubblegum", sans-serif;
+   letter-spacing: 1px;
 }
 
 .about,

@@ -1,52 +1,26 @@
-import React from "react";
 import "./Home.css";
-import { Link } from "react-router-dom";
+import React from "react"; // Importing useState and useEffect
 
 const Home = () => {
+   // const [message, setMessage] = useState("");
+
+   // useEffect(() => {
+   //    getTestMessage().then(setMessage);
+   // }, []);
+
+   // const getTestMessage = async () => {
+   //    // Simulating an API call or returning a message
+   //    return "This is a test message!";
+   // };
+
    return (
       <div className="home">
-         {/* Header Section */}
-         <section className="header">
-            <div className="logo">
-               <img
-                  src="https://static.vecteezy.com/system/resources/previews/012/319/431/original/farm-logo-livestock-logo-icon-design-template-vector.jpg"
-                  alt="Farm Logo"
-               />
-            </div>
-            <nav>
-               <ul>
-                  <li>
-                     <Link to="/">Home</Link>
-                  </li>
-                  <li>
-                     <Link to="/marketplace">Marketplace</Link>
-                  </li>
-                  <li>
-                     <Link to="/sign-up">Shortage Alerts</Link>
-                  </li>
-                  <li>
-                     <Link to="/marketplace">Todays Pricing</Link>
-                  </li>
-                  <li>
-                     <Link to="/sign-up">My Orders</Link>
-                  </li>
-                  <li>
-                     <Link to="/marketplace">Weather Forecasts</Link>
-                  </li>
-                  <li>
-                     <Link to="/how-it-works">How It Works</Link>
-                  </li>
-                  <li>
-                     <Link to="/signup">Sign Up</Link>
-                  </li>
-               </ul>
-            </nav>
-         </section>
-
          {/* Hero Section */}
          <section className="hero">
-            <h1>Empowering Farmers, Connecting Markets</h1>
-            <p>
+            <h1 className="heroHeading">
+               Empowering Farmers, Connecting Markets
+            </h1>
+            <p className="heroText">
                Real-time crop pricing, direct communication with urban markets,
                and more to help farmers get the best deals.
             </p>
@@ -83,11 +57,6 @@ const Home = () => {
                <p>Direct communication with buyers to set fair prices.</p>
             </div>
          </section>
-
-         {/* Footer */}
-         <footer>
-            <p>&copy; 2024 AgriPrice Insight. All Rights Reserved.</p>
-         </footer>
       </div>
    );
 };

@@ -1,12 +1,19 @@
 const mongoose = require("mongoose");
 
 const cropSchema = new mongoose.Schema({
-   name: { type: String, required: true },
-   price: { type: Number, required: true },
-   marketLocation: { type: String, required: true },
-   availableStock: { type: Number, required: true },
-   deliveryCost: { type: Number },
+   name: String,
+   category: String,
+   price: {
+      current: Number,
+      unit: String,
+   },
+   availability: {
+      isShortage: Boolean,
+      lastUpdated: { type: Date, default: Date.now },
+   },
+   region: String,
+   createdAt: { type: Date, default: Date.now },
+   updatedAt: { type: Date, default: Date.now },
 });
 
-const Crop = mongoose.model("Crop", cropSchema);
-module.exports = Crop;
+module.exports = mongoose.model("Crop", cropSchema);
