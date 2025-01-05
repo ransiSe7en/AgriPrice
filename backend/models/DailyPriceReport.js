@@ -1,30 +1,42 @@
 const mongoose = require("mongoose");
 
-const priceComparisonSchema = new mongoose.Schema({
-   commodity: { type: String, required: true },
-   market: { type: String, required: true },
-   yesterday: { type: Number, required: true },
-   today: { type: Number, required: true },
-   change: { type: String, required: true }, // ▲ or ▼
+// Market Price Schema
+const marketPriceSchema = new mongoose.Schema({
+   market: { type: String },
+   wholesaleYesterday: { type: Number },
+   wholesaleToday: { type: Number },
+   retailYesterday: { type: Number },
+   retailToday: { type: Number },
 });
 
-const commoditySchema = new mongoose.Schema({
-   name: { type: String, required: true },
-   marketDetails: [
-      {
-         market: { type: String, required: true },
-         priceChange: { type: String, required: true }, // Price increase/decrease explanation
-      },
-   ],
+// Wholesale Price Schema
+const wholesalePriceSchema = new mongoose.Schema({
+   name: { type: String },
+   unit: { type: String },
+   Pettah: marketPriceSchema,
+   Dambulla: marketPriceSchema,
+   Narahenpita: marketPriceSchema,
 });
 
+// Daily Price Report Schema
 const dailyPriceReportSchema = new mongoose.Schema({
-   date: { type: Date, required: true },
-   vegetables: [commoditySchema],
-   fruits: [commoditySchema],
-   fish: [commoditySchema],
-   priceComparisons: [priceComparisonSchema],
-   trendsAndObservations: { type: String, required: false },
+   date: { type: Date },
+   wholesale_prices: {
+      vegetables: [wholesalePriceSchema],
+      other: [wholesalePriceSchema],
+   },
+   retail_prices: {
+      vegetables: [wholesalePriceSchema],
+      other: [wholesalePriceSchema],
+   },
+   createdAt: { type: Date, default: Date.now },
+   updatedAt: { type: Date, default: Date.now },
+});
+
+// Middleware to update updatedAt on save
+dailyPriceReportSchema.pre("save", function (next) {
+   this.updatedAt = Date.now();
+   next();
 });
 
 module.exports = mongoose.model("DailyPriceReport", dailyPriceReportSchema);

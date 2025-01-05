@@ -8,7 +8,9 @@ const Header = () => {
       <header className="header">
          <div className="logo">
             <img src={Logo} alt="Farm Logo" />
-            <h2>AGRI-PRICE</h2>
+            <Link to="/">
+               <h2>AGRI-PRICE</h2>
+            </Link>
          </div>
          <nav>
             <ul>
@@ -19,7 +21,7 @@ const Header = () => {
                   <Link to="/daily-price-report">Today's Rates</Link>
                </li>
                <li>
-                  <Link to="/sign-up">Shortages</Link>
+                  <Link to="/shortages">Shortages</Link>
                </li>
                <li>
                   <Link to="/sign-up">My Order Centre</Link>

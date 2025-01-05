@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Marketplace from "./pages/Marketplace";
 import Header from "./components/Header";
 import DailyPriceReport from "./pages/DailyPriceReport";
+import Shortages from "./pages/Shortages";
 
 function App() {
    return (
@@ -17,6 +18,7 @@ function App() {
                   path="/daily-price-report"
                   element={<DailyPriceReport />}
                />
+               <Route path="/shortages" element={<Shortages />} />
             </Routes>
          </div>
       </Router>

@@ -22,6 +22,17 @@ db.on("error", console.error.bind(console, "Connection error:"));
 db.once("open", () => console.log("Connected to MongoDB"));
 
 // Routes
+
+app.get("/api/daily-price-report", async (req, res) => {
+   try {
+      const data = await dailyPriceReportRoute.find();
+      res.json(data);
+   } catch (error) {
+      res.status(500).json({ message: "Error fetching data", error });
+   }
+});
+
+// crops route
 const cropsRouter = require("./routes/crops");
 app.use("/api/crops", cropsRouter);
 
@@ -29,9 +40,9 @@ app.use("/api/crops", cropsRouter);
 const farmersRoute = require("./routes/farmers");
 app.use("/api/farmers", farmersRoute);
 
-// Include the dailyPriceReport route
-const dailyPriceReportRoute = require("./routes/dailyPriceReport");
-app.use("/api/dailyPriceReport", dailyPriceReportRoute);
+// //dailyPriceReport route
+// const dailyPriceReportRoute = require("./routes/dailypricereport");
+// app.use("/api/dailypricereport", dailyPriceReportRoute);
 
 app.listen(PORT, () =>
    console.log(`Server running on http://localhost:${PORT}`)

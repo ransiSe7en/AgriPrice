@@ -1,69 +1,41 @@
 const express = require("express");
-const DailyPriceReport = require("../models/DailyPriceReport"); // Import the model
 const router = express.Router();
+const DailyPriceReport = require("../models/DailyPriceReport"); // Path to your Mongoose model
 
-// Route to handle GET request for daily price report
-// router.get("/", async (req, res) => {
-//    try {
-//       const report = await DailyPriceReport.findOne().sort({ date: -1 }); // Fetch the latest report
-//       if (!report) {
-//          return res
-//             .status(404)
-//             .json({ message: "Daily price report not found" });
-//       }
-//       res.status(200).json(report); // Send the fetched report data
-//    } catch (error) {
-//       console.error(error);
-//       res.status(500).json({ message: "Failed to fetch daily price report" });
-//    }
-// });
-
-router.get("/", async (req, res) => {
+// GET route to fetch the latest daily price report
+router.get("/api/dailypricereport", async (req, res) => {
    try {
-      const report = await DailyPriceReport.findOne().sort({ date: -1 }); // Fetch the latest report
-      if (!report) {
-         return res
-            .status(404)
-            .json({ message: "Daily price report not found" });
-      }
-      res.status(200).json(report);
+      const report = await DailyPriceReport.findOne().sort({ date: -1 }); // or any other query based on your use case
+      res.json(report);
    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Failed to fetch daily price report" });
+      res.status(500).json({ message: "Server error" });
    }
 });
 
-// Route to handle POST request for daily price report
-router.post("/", async (req, res) => {
-   try {
-      const {
-         date,
-         vegetables,
-         fruits,
-         fish,
-         priceComparisons,
-         trendsAndObservations,
-      } = req.body;
+// POST route to create a new daily price report
+router.post("/api/dailypricereport", async (req, res) => {
+   const { date, price, description } = req.body;
 
-      // Create a new report document
+   // Basic validation
+   if (!date || !price) {
+      return res.status(400).json({ message: "Date and price are required" });
+   }
+
+   try {
       const newReport = new DailyPriceReport({
          date,
-         vegetables,
-         fruits,
-         fish,
-         priceComparisons,
-         trendsAndObservations,
+         price,
+         description,
       });
 
-      // Save to MongoDB
+      // Save the new report to the database
       await newReport.save();
-
       res.status(201).json({
-         message: "Daily price report created successfully",
+         message: "Report created successfully",
+         report: newReport,
       });
    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Failed to create daily price report" });
+      res.status(500).json({ message: "Server error" });
    }
 });
 
