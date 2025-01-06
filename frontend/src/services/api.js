@@ -1,9 +1,34 @@
+// frontend/services/api.js
 import axios from "axios";
 
-// API URL for crops
-const CROPS_API_URL = "http://localhost:5000/api/crops"; // Replace with your deployed backend URL
-// API URL for daily price report
-const DAILY_PRICE_REPORT_API_URL = "http://localhost:5000/api/dailyPriceReport"; // Replace with your deployed backend URL
+// const API_URL = "http://localhost:5000/api";
+
+const CROPS_API_URL = "http://localhost:5000/api/crops";
+
+const DAILY_PRICE_REPORT_API_URL =
+   "http://localhost:5000/api/daily-price-report";
+
+const SHORTAGES_API_URL = "http://localhost:5000/api/shortages";
+
+export const getShortages = async () => {
+   const response = await axios.get(`${SHORTAGES_API_URL}`);
+   return response.data;
+};
+
+export const getShortagesByCommodity = async (commodity) => {
+   const response = await axios.get(`${SHORTAGES_API_URL}/${commodity}`);
+   return response.data;
+};
+
+export const postShortage = async (shortageData) => {
+   try {
+      const response = await axios.post(SHORTAGES_API_URL, shortageData);
+      return response.data;
+   } catch (error) {
+      console.error("Error posting shortage data:", error);
+      throw error;
+   }
+};
 
 // Fetch crops data
 export const getCrops = async () => {

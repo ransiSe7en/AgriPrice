@@ -1,3 +1,4 @@
+//backend/models/DailyPriceReport.js
 const mongoose = require("mongoose");
 
 // Market Price Schema

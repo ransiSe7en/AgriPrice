@@ -1,9 +1,10 @@
+// backend/routes/dailypricereport.js
 const express = require("express");
 const router = express.Router();
 const DailyPriceReport = require("../models/DailyPriceReport"); // Path to your Mongoose model
 
 // GET route to fetch the latest daily price report
-router.get("/api/dailypricereport", async (req, res) => {
+router.get("/", async (req, res) => {
    try {
       const report = await DailyPriceReport.findOne().sort({ date: -1 }); // or any other query based on your use case
       res.json(report);
@@ -13,7 +14,7 @@ router.get("/api/dailypricereport", async (req, res) => {
 });
 
 // POST route to create a new daily price report
-router.post("/api/dailypricereport", async (req, res) => {
+router.post("/", async (req, res) => {
    const { date, price, description } = req.body;
 
    // Basic validation

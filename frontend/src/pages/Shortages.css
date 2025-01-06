@@ -1,0 +1,90 @@
+/* frontend/src/pages/Shortages.css */
+.shortages-page {
+   padding: 20px;
+}
+
+.shortage-count {
+   font-size: 18px;
+   margin-bottom: 20px;
+}
+
+.filter-section {
+   margin-bottom: 20px;
+}
+
+.filter-section label {
+   margin-right: 10px;
+}
+
+.filter-section select {
+   padding: 5px;
+}
+
+.shortages-list {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+   gap: 20px;
+}
+
+.shortage-item {
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   padding: 15px;
+   text-align: center;
+}
+
+.commodity-image {
+   max-width: 100%;
+   height: auto;
+   margin-bottom: 10px;
+}
+
+.modal-overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-color: rgba(0, 0, 0, 0.75);
+   z-index: 1000;
+}
+
+.modal-content {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background: #fff;
+   padding: 20px;
+   border-radius: 8px;
+   max-width: 500px;
+   width: 100%;
+}
+.shortage-item {
+   position: relative; /* Make the tile the positioning context for the button */
+   padding: 10px;
+   border: 1px solid #ccc;
+   margin: 10px;
+   border-radius: 5px;
+   background-color: #fff;
+   /* Adjust based on your layout */
+   overflow: hidden;
+}
+
+.delete-button {
+   position: absolute; /* Position relative to the tile */
+   top: 10px; /* Adjust spacing from the top */
+   right: 10px; /* Adjust spacing from the right */
+   background-color: darkred;
+   color: #fff;
+   border: none;
+   border-radius: 50%;
+   font-size: 16px;
+   width: 30px;
+   height: 30px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   z-index: 10; /* Ensure it's above other content */
+}

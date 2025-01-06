@@ -1,3 +1,5 @@
+//frontend/pages/DailyPriceReport.js
+
 import React, { useState, useEffect } from "react";
 import "./DailyPriceReport.css";
 
@@ -7,12 +9,25 @@ const DailyPriceReport = () => {
    const [date, setDate] = useState("today"); // Default date: today
    const [searchQuery, setSearchQuery] = useState(""); // Store the search query
 
+   // useEffect(() => {
+   //    // Fetch data from the backend
+   //    fetch("http://localhost:5000/api/dailypricereports")
+   //       .then((response) => response.json())
+   //       .then((data) => {
+   //          console.log("Fetched data:", data);
+   //          setReportData(data);
+   //       })
+   //       .catch((error) => console.error("Error fetching data:", error));
+   // }, []);
+
    useEffect(() => {
-      // Fetch data from the backend
-      fetch("http://localhost:5000/api/dailypricereport")
-         .then((response) => response.json())
+      fetch("http://localhost:5000/api/dailypricereports")
+         .then((response) => {
+            console.log("Fetch status:", response.status);
+            return response.json();
+         })
          .then((data) => {
-            console.log("Fetched data:", data);
+            console.log("Fetched data:", data); // Log the data structure
             setReportData(data);
          })
          .catch((error) => console.error("Error fetching data:", error));
