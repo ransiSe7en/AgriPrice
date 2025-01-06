@@ -20,15 +20,15 @@ export const getShortagesByCommodity = async (commodity) => {
    return response.data;
 };
 
-export const postShortage = async (shortageData) => {
-   try {
-      const response = await axios.post(SHORTAGES_API_URL, shortageData);
-      return response.data;
-   } catch (error) {
-      console.error("Error posting shortage data:", error);
-      throw error;
-   }
-};
+// export const postShortage = async (shortageData) => {
+//    try {
+//       const response = await axios.post(SHORTAGES_API_URL, shortageData);
+//       return response.data;
+//    } catch (error) {
+//       console.error("Error posting shortage data:", error);
+//       throw error;
+//    }
+// };
 
 // Fetch crops data
 export const getCrops = async () => {
@@ -49,5 +49,27 @@ export const getDailyPriceReport = async () => {
    } catch (error) {
       console.error("Error fetching daily price report:", error);
       return null;
+   }
+};
+
+export const postShortage = async (shortage) => {
+   try {
+      const response = await fetch("http://localhost:5000/api/shortages", {
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json",
+         },
+         body: JSON.stringify(shortage),
+      });
+
+      if (!response.ok) {
+         throw new Error("Failed to post shortage");
+      }
+
+      const data = await response.json(); // Parse response JSON
+      return { success: true, data }; // Wrap in success key for consistency
+   } catch (error) {
+      console.error("Error posting shortage:", error);
+      return { success: false, error: error.message };
    }
 };

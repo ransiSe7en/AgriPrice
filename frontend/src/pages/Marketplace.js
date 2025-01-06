@@ -4,13 +4,13 @@ import { getCrops } from "../services/api";
 const Marketplace = () => {
    const [crops, setCrops] = useState([]);
 
-   useEffect(() => {
-      const fetchCrops = async () => {
-         const cropData = await getCrops();
-         setCrops(cropData);
-      };
-      fetchCrops();
-   }, []);
+   // useEffect(() => {
+   //    const fetchCrops = async () => {
+   //       const cropData = await getCrops();
+   //       setCrops(cropData);
+   //    };
+   //    fetchCrops();
+   // }, []);
 
    return (
       <div>
