@@ -3,9 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
-
 dotenv.config();
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -23,32 +21,33 @@ db.on("error", console.error.bind(console, "Connection error:"));
 db.once("open", () => console.log("Connected to MongoDB"));
 
 // Routes
-// DAILYPRICEREPORT
-const DailyPriceReport = require("./models/DailyPriceReport"); // Update with actual file path
+
+//=====================================  DailyPriceReport Routes  ======================================//
+const DailyPriceReport = require("./models/DailyPriceReport");
 
 app.get("/api/dailypricereports", async (req, res) => {
    try {
       const data = await DailyPriceReport.find();
       res.json(data);
    } catch (error) {
-      console.error("Error fetching daily price reports:", err); // Log error details
+      console.error("Error fetching daily price reports:", error); // Log error details
       res.status(500).json({
          message: "Internal Server Error",
          error: err.message,
       });
    }
 });
+//=====================================  DailyPriceReport Routes  ======================================//
 
 // SHORTAGES
 const shortagesRouter = require("./routes/Shortage");
-
 const Shortage = require("./models/Shortage");
 app.use("/api/shortages", shortagesRouter);
 
 app.post("/api/shortages", async (req, res) => {
    try {
       const newShortage = new Shortage({
-         ...req.body, // Assuming you have a Shortage model
+         ...req.body,
       });
       await newShortage.save();
       res.status(201).json(newShortage);
@@ -58,8 +57,29 @@ app.post("/api/shortages", async (req, res) => {
    }
 });
 
-app.get("/api/shortages/test", (req, res) => {
-   res.send("Test route is working!");
+// Shortages test route
+// app.get("/api/shortages/test", (req, res) => {
+//    res.send("Test route is working!");
+// });
+
+// MARKETPLACE
+const marketplaceRoutes = require("./routes/marketplace");
+app.use("/api/marketplace", marketplaceRoutes);
+const MarketplaceListing = require("./models/MarketplaceListing");
+
+app.use("/api/marketplacelistings", marketplaceRoutes);
+
+app.get("/api/marketplacelistings", async (req, res) => {
+   try {
+      const data = await MarketplaceListing.find();
+      res.json(data);
+   } catch (error) {
+      console.error("Error fetching Marketplace Listings:", err); // Log error details
+      res.status(500).json({
+         message: "Internal Server Error",
+         error: err.message,
+      });
+   }
 });
 
 // crops route
@@ -69,7 +89,6 @@ app.use("/api/crops", cropsRouter);
 // Farmers route
 const farmersRoute = require("./routes/farmers");
 app.use("/api/farmers", farmersRoute);
-
 const dailyPriceReportRoute = require("./routes/dailypricereport");
 app.use("/api/dailypricereports", dailyPriceReportRoute);
 

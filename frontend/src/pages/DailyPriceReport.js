@@ -1,4 +1,4 @@
-//frontend/pages/DailyPriceReport.js
+//frontend/src/pages/DailyPriceReport.js
 
 import React, { useState, useEffect } from "react";
 import "./DailyPriceReport.css";
@@ -8,17 +8,6 @@ const DailyPriceReport = () => {
    const [view, setView] = useState("wholesale"); // Default view: wholesale
    const [date, setDate] = useState("today"); // Default date: today
    const [searchQuery, setSearchQuery] = useState(""); // Store the search query
-
-   // useEffect(() => {
-   //    // Fetch data from the backend
-   //    fetch("http://localhost:5000/api/dailypricereports")
-   //       .then((response) => response.json())
-   //       .then((data) => {
-   //          console.log("Fetched data:", data);
-   //          setReportData(data);
-   //       })
-   //       .catch((error) => console.error("Error fetching data:", error));
-   // }, []);
 
    useEffect(() => {
       fetch("http://localhost:5000/api/dailypricereports")
@@ -81,6 +70,38 @@ const DailyPriceReport = () => {
          </tr>
       ));
    };
+
+   // const renderTableRows = () => {
+   //    if (!reportData || !Array.isArray(reportData.items)) {
+   //       return (
+   //          <tr>
+   //             <td colSpan="5">No data available</td>
+   //          </tr>
+   //       );
+   //    }
+
+   //    const filteredData = reportData.items.filter((item) =>
+   //       item.name.toLowerCase().includes(searchQuery)
+   //    );
+
+   //    if (filteredData.length === 0) {
+   //       return (
+   //          <tr>
+   //             <td colSpan="5">No items match the search query</td>
+   //          </tr>
+   //       );
+   //    }
+
+   //    return filteredData.map((item, index) => (
+   //       <tr key={index}>
+   //          <td>{item.name}</td>
+   //          <td>{item.wholesale?.Pettah?.[date] || "No price"}</td>
+   //          <td>{item.wholesale?.Dambulla?.[date] || "No price"}</td>
+   //          <td>{item.wholesale?.Narahenpita?.[date] || "No price"}</td>
+   //          <td>{item.unit}</td>
+   //       </tr>
+   //    ));
+   // };
 
    return (
       <div className="TodaysPricesBody">
