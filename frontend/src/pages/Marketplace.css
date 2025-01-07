@@ -1,13 +1,6 @@
-.marketplace {
-   display: flex;
-   flex-direction: column;
-   width: 100%;
-   max-width: 1200px;
-   margin: 0 auto;
-   font-family: Arial, sans-serif;
-}
+/* 
 
-/* .search-bar {
+.search-bar {
    width: 100%;
    margin: 10px auto;
    max-width: 100%;
@@ -17,10 +10,22 @@
    width: 100%;
    padding: 10px;
    margin: 10px auto;
-   border: 1px solid #ddd;
+   border: 1px solid #ddd
    border-radius: 4px;
    font-size: 16px;
-} */
+}
+
+*/
+
+.marketplace {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   max-width: 1200px;
+   margin: 0 auto;
+   font-family: Arial, sans-serif;
+   overflow-x: hidden;
+}
 
 .marketplace-content {
    display: flex;
@@ -48,6 +53,11 @@
    font-size: 14px;
 }
 
+.PriceFilter {
+   display: flex;
+   gap: 10px;
+}
+
 .filter-section select,
 .filter-section input {
    width: 100%;
@@ -60,11 +70,12 @@
 
 .filter-section .categories {
    display: flex;
-   gap: 10px;
+   /* gap: 10px; */
    flex-wrap: wrap;
 }
 
 .filter-section .categories button {
+   flex-grow: 1;
    padding: 8px 15px;
    border: 1px solid #ddd;
    border-radius: 4px;
@@ -72,6 +83,8 @@
    cursor: pointer;
    font-size: 14px;
    transition: all 0.3s;
+   text-align: center; /* Align text to center for better appearance */
+   min-width: 100px; /* Set a minimum width for buttons */
 }
 
 .filter-section .categories button.active {
@@ -90,6 +103,7 @@
    list-style: none;
    padding: 0;
    margin: 0;
+   font-size: 13px;
 }
 
 .filter-section .cities li {
@@ -112,10 +126,80 @@
    color: #007bff;
 }
 
-.listings {
+.right-section {
    flex: 3;
+}
+
+.search-bar {
+   margin-bottom: 20px;
+}
+
+.search-bar input {
+   width: 100%;
+   padding: 10px;
+   margin: 10px 0;
+   border: 1px solid #ddd;
+   border-radius: 4px;
+   font-size: 16px;
+}
+
+.image-boxes {
+   margin-bottom: 20px;
+}
+
+.image-box {
+   width: 40px;
+   height: 40px;
+   display: inline-block;
+   margin: 5px;
+   cursor: pointer;
+   text-align: center;
+   border-radius: 8px;
+   border: 2px solid #009a4e;
+   padding: 5px;
+}
+
+.image-box img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   border-radius: 8px;
+}
+
+.image-box:hover {
+   opacity: 0.8;
+}
+
+.image-box.active {
+   border: 3px solid #009a4e;
+   width: 45px;
+   height: 45px;
+}
+
+/* .image-boxes {
+   display: flex;
+   gap: 10px;
+   margin-bottom: 20px;
+}
+
+.image-box {
+   width: 60px;
+   height: 60px;
+   border: 1px solid #ddd;
+   border-radius: 4px;
+   cursor: pointer;
+}
+
+.image-box img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   border-radius: 4px;
+} */
+
+.listings {
    display: grid;
-   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+   grid-template-columns: repeat(3, 1fr);
    gap: 20px;
 }
 
@@ -123,36 +207,34 @@
    border: 1px solid #ddd;
    border-radius: 4px;
    padding: 15px;
-   text-align: center;
    background-color: #fff;
-   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-   transition: transform 0.3s, box-shadow 0.3s;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .listing-tile img {
-   max-width: 100%;
-   height: 150px;
+   width: 100%;
+   height: 200px;
    object-fit: cover;
    border-radius: 4px;
+   margin-bottom: 10px;
 }
 
 .listing-tile h3 {
    font-size: 18px;
-   margin: 10px 0;
-   color: #333;
+   margin-bottom: 10px;
 }
 
 .listing-tile p {
-   font-size: 14px;
-   color: #666;
    margin: 5px 0;
+   font-size: 14px;
 }
 
-.listing-tile p strong {
-   color: #000;
-}
-
-.listing-tile:hover {
-   transform: translateY(-5px);
-   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+.filter-section input[type="text"] {
+   width: 100%;
+   max-width: 300px;
+   padding: 8px;
+   margin: 8px 0;
+   box-sizing: border-box;
+   border-radius: 4px;
+   border: 1px solid #ccc;
 }
