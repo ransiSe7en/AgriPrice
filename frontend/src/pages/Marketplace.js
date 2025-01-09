@@ -516,15 +516,18 @@ const Marketplace = () => {
                   ) : (
                      filteredListings.map((listing) => (
                         <div key={listing.id} className="listing-tile">
-                           <img src={listing.image} alt={listing.title} />
+                           <img
+                              src={`http://localhost:5000${listing.image}`}
+                              alt={listing.title}
+                           />
                            <h3>{listing.title}</h3>
                            <p>{listing.description}</p>
                            <p>
                               <strong>Price:</strong> {listing.price} LKR
                            </p>
-                           {/* <p>
+                           <p>
                               <strong>By:</strong> {listing.author}
-                           </p> */}
+                           </p>
                            <p>
                               <strong>Location:</strong> {listing.location}
                            </p>

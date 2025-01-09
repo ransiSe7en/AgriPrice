@@ -8,6 +8,7 @@ const marketplaceListingSchema = new mongoose.Schema({
    location: { type: String, required: true },
    createdAt: { type: Date, default: Date.now },
    author: { type: String, required: false },
+   image: { type: String, required: false },
 });
 
 const MarketplaceListing = mongoose.model(

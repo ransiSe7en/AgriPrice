@@ -143,6 +143,7 @@ const MarketplaceListing = require("./models/MarketplaceListing");
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use("/uploads", express.static("uploads"));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {

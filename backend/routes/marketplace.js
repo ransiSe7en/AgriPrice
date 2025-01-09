@@ -1,62 +1,52 @@
+// //backend/routes/marketplace.js
 // const express = require("express");
 // const router = express.Router();
 // const MarketplaceListing = require("../models/MarketplaceListing");
 
-// // Get all marketplace listings
+// // Get all listings
 // router.get("/", async (req, res) => {
 //    try {
 //       const listings = await MarketplaceListing.find();
-//       res.json(listings);
+//       res.status(200).json(listings);
 //    } catch (error) {
-//       res.status(500).json({ message: "Error fetching listings", error });
+//       res.status(500).json({ error: "Failed to fetch listingssss" });
 //    }
 // });
 
-// // // Get all listings
-// // router.get("/", async (req, res) => {
-// //    try {
-// //       const listings = await MarketplaceListing.find();
-// //       res.status(200).json(listings);
-// //    } catch (error) {
-// //       res.status(500).json({ error: "Failed to fetch listings" });
-// //    }
-// // });
+// // POST route to create a marketplace listing
+// router.post("/", async (req, res) => {
+//    try {
+//       const newListing = new MarketplaceListing(req.body);
+//       await newListing.save();
+//       res.status(201).json(newListing);
+//    } catch (error) {
+//       console.error("Error creating listing:", error);
+//       res.status(500).json({
+//          message: "Failed to create listing",
+//          error: error.message,
+//       });
+//    }
+// });
 
-// // module.exports = router;
+// module.exports = router;
 
-// // const express = require("express");
-// // const router = express.Router();
-// // const MarketplaceListing = require("../models/MarketplaceListing");
-
-// // router.get("/", async (req, res) => {
-// //    const { sortBy, category, priceFrom, priceTo, city } = req.query;
-
-// //    const filters = {};
-// //    if (category) filters.category = category;
-// //    if (city && city !== "All of Sri Lanka") filters.location = city;
-// //    filters.price = { $gte: priceFrom || 0, $lte: priceTo || 10000 };
-
-// //    const sortOptions = {
-// //       newest: { createdAt: -1 },
-// //       oldest: { createdAt: 1 },
-// //       priceHigh: { price: -1 },
-// //       priceLow: { price: 1 },
-// //    };
-
-// //    try {
-// //       const listings = await MarketplaceListing.find(filters).sort(
-// //          sortOptions[sortBy] || {}
-// //       );
-// //       res.json(listings);
-// //    } catch (error) {
-// //       res.status(500).send("Server Error");
-// //    }
-// // });
-
-//backend/routes/marketplace.js
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
+const path = require("path");
 const MarketplaceListing = require("../models/MarketplaceListing");
+
+// Configure Multer
+const storage = multer.diskStorage({
+   destination: (req, file, cb) => {
+      cb(null, "uploads/"); // Directory to store uploaded images
+   },
+   filename: (req, file, cb) => {
+      cb(null, Date.now() + path.extname(file.originalname)); // Unique file name
+   },
+});
+
+const upload = multer({ storage });
 
 // Get all listings
 router.get("/", async (req, res) => {
@@ -64,14 +54,17 @@ router.get("/", async (req, res) => {
       const listings = await MarketplaceListing.find();
       res.status(200).json(listings);
    } catch (error) {
-      res.status(500).json({ error: "Failed to fetch listingssss" });
+      res.status(500).json({ error: "Failed to fetch listings" });
    }
 });
 
-// POST route to create a marketplace listing
-router.post("/", async (req, res) => {
+// Create a new listing with an image
+router.post("/", upload.single("image"), async (req, res) => {
    try {
-      const newListing = new MarketplaceListing(req.body);
+      const newListing = new MarketplaceListing({
+         ...req.body,
+         image: req.file ? `/uploads/${req.file.filename}` : null,
+      });
       await newListing.save();
       res.status(201).json(newListing);
    } catch (error) {
