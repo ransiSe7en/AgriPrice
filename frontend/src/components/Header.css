@@ -27,6 +27,7 @@
 .header nav ul {
    display: flex;
    list-style-type: none;
+   align-items: baseline;
 }
 
 .header nav ul li {
@@ -47,17 +48,31 @@
    text-decoration: underline;
 }
 
-/* Profile menu container */
 .profile-menu-container {
+   display: flex;
+   align-items: center;
    position: relative;
 }
 
-/* Profile icon */
 .profile-icon {
-   cursor: pointer;
    display: flex;
-   align-items: center;
-   justify-content: center;
+   align-items: center; /* Align items vertically */
+   cursor: pointer;
+   gap: 3px;
+   /* padding: 10px; */
+   border: 1px solid black;
+   padding: 0.75rem;
+   background-color: #fff;
+   border-radius: 4px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.profile-icon:hover {
+   padding: 0.8rem;
+}
+
+.welcome-text {
+   margin-right: 3px; /* Extra space between text and icon */
 }
 
 /* Profile menu dropdown */
@@ -73,6 +88,32 @@
    width: 200px;
    z-index: 1000;
    text-align: left;
+}
+/* .profile-menu {
+   position: absolute;
+   top: 40px;
+   right: 0;
+   background-color: white;
+   border: 1px solid #ccc;
+   padding: 10px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   width: 200px;
+   z-index: 10;
+} */
+
+.close-btn {
+   position: absolute;
+   top: 5px;
+   right: 5px;
+   background: none;
+   border: none;
+   font-size: 16px;
+   color: #888;
+   cursor: pointer;
+}
+
+.close-btn:hover {
+   color: #333;
 }
 
 /* User name */
@@ -128,4 +169,8 @@
 
 .rounded-btn:hover {
    background-color: #0056b3;
+}
+
+.profile-menu-container .profile-icon {
+   margin-right: 15px; /* Adjust this to your liking for spacing */
 }

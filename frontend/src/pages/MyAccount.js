@@ -1,13 +1,51 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom";
 import "./MyAccount.css";
 
 const MyAccount = () => {
-   const { user } = useUser();
+   const { user, isLoaded } = useUser();
    const navigate = useNavigate();
    const [activeTab, setActiveTab] = useState("accountInfo");
+   const [isEditing, setIsEditing] = useState(false); // Manage editing state
+   const [formData, setFormData] = useState({
+      firstName: user?.firstName || "",
+      lastName: user?.lastName || "",
+      email: user?.emailAddresses[0]?.emailAddress || "",
+   });
 
+   // Handle form input changes
+   const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({ ...formData, [name]: value });
+   };
+
+   // Update user profile
+   const handleUpdate = async (e) => {
+      e.preventDefault();
+
+      try {
+         if (!isLoaded || !user) return;
+
+         // Ensure the payload has correct fields (Clerk typically uses camelCase)
+         const payload = {
+            firstName: formData.firstName, // Use camelCase as per Clerk API
+            lastName: formData.lastName, // Use camelCase
+            // emailAddresses: [{ emailAddress: formData.email }], // Make sure email format is correct
+         };
+
+         // Attempt to update the user with the correct payload
+         await user.update(payload);
+
+         setIsEditing(false); // End editing mode
+         alert("Profile updated successfully!");
+      } catch (error) {
+         console.error("Error updating profile:", error);
+         alert("An error occurred while updating your profile.");
+      }
+   };
+
+   const handleDeleteAccount = {};
    const menuItems = [
       { key: "accountInfo", label: "Account Info" },
       { key: "myOrders", label: "My Orders" },
@@ -36,19 +74,65 @@ const MyAccount = () => {
             {activeTab === "accountInfo" && (
                <div className="account-info">
                   <h2>Account Information</h2>
-                  <p>
-                     <strong>First Name:</strong> {user?.firstName}
-                  </p>
-                  <p>
-                     <strong>Last Name:</strong> {user?.lastName}
-                  </p>
-                  <p>
-                     <strong>Email:</strong>{" "}
-                     {user?.emailAddresses[0]?.emailAddress}
-                  </p>
-                  <button onClick={() => navigate("/my-account/edit")}>
-                     Edit Info
-                  </button>
+                  {isEditing ? (
+                     <form onSubmit={handleUpdate}>
+                        <div>
+                           <label>First Name: </label>
+                           <input
+                              type="text"
+                              name="firstName"
+                              value={formData.firstName}
+                              onChange={handleInputChange}
+                              required
+                           />
+                        </div>
+                        <div>
+                           <label>Last Name: </label>
+                           <input
+                              type="text"
+                              name="lastName"
+                              value={formData.lastName}
+                              onChange={handleInputChange}
+                              required
+                           />
+                        </div>
+                        <div>
+                           <label>Email: </label>
+                           <input
+                              value={
+                                 user?.emailAddresses[0]?.emailAddress || ""
+                              }
+                              disabled
+                           />
+                        </div>
+                        <button type="submit">Save Changes</button>
+                        <button
+                           type="button"
+                           onClick={() => setIsEditing(false)}
+                        >
+                           Cancel
+                        </button>
+                     </form>
+                  ) : (
+                     <>
+                        <p>
+                           <strong>First Name:</strong> {user?.firstName}
+                        </p>
+                        <p>
+                           <strong>Last Name:</strong> {user?.lastName}
+                        </p>
+                        <p>
+                           <strong>Email:</strong>{" "}
+                           {user?.emailAddresses[0]?.emailAddress}
+                        </p>
+                        <button onClick={() => setIsEditing(true)}>
+                           Edit Info
+                        </button>
+                        <button onClick={() => handleDeleteAccount}>
+                           Delete Account
+                        </button>
+                     </>
+                  )}
                </div>
             )}
             {activeTab === "myProducts" && (
@@ -103,6 +187,112 @@ const MyAccount = () => {
 };
 
 export default MyAccount;
+
+// import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { useUser } from "@clerk/clerk-react";
+// import "./MyAccount.css";
+
+// const MyAccount = () => {
+//    const { user } = useUser();
+//    const navigate = useNavigate();
+//    const [activeTab, setActiveTab] = useState("accountInfo");
+
+//    const menuItems = [
+//       { key: "accountInfo", label: "Account Info" },
+//       { key: "myOrders", label: "My Orders" },
+//       { key: "myProducts", label: "My Products" },
+//       { key: "govtInfo", label: "Government Info" },
+//       { key: "farmingTips", label: "Farming Tips" },
+//       { key: "marketUpdates", label: "Market Updates" },
+//    ];
+
+//    return (
+//       <div className="my-account-page">
+//          <div className="sidebar">
+//             <ul>
+//                {menuItems.map((item) => (
+//                   <li
+//                      key={item.key}
+//                      className={activeTab === item.key ? "active" : ""}
+//                      onClick={() => setActiveTab(item.key)}
+//                   >
+//                      {item.label}
+//                   </li>
+//                ))}
+//             </ul>
+//          </div>
+//          <div className="content">
+//             {activeTab === "accountInfo" && (
+//                <div className="account-info">
+//                   <h2>Account Information</h2>
+//                   <p>
+//                      <strong>First Name:</strong> {user?.firstName}
+//                   </p>
+//                   <p>
+//                      <strong>Last Name:</strong> {user?.lastName}
+//                   </p>
+//                   <p>
+//                      <strong>Email:</strong>{" "}
+//                      {user?.emailAddresses[0]?.emailAddress}
+//                   </p>
+//                   <button onClick={() => navigate("/my-account/edit")}>
+//                      Edit Info
+//                   </button>
+//                </div>
+//             )}
+//             {activeTab === "myProducts" && (
+//                <div className="my-products">
+//                   <h2>My Products</h2>
+//                   <p>You don’t have any products listed yet.</p>
+//                   <button
+//                      className="start-order-btn"
+//                      onClick={() => navigate("/add")}
+//                   >
+//                      Add a Product →
+//                   </button>
+//                </div>
+//             )}
+//             {activeTab === "myOrders" && (
+//                <div className="my-orders">
+//                   <h2>My Orders</h2>
+//                   <p>No orders yet. Start an order now!</p>
+//                   <button
+//                      className="start-order-btn"
+//                      onClick={() => navigate("/marketplace")}
+//                   >
+//                      Go to Marketplace →
+//                   </button>
+//                </div>
+//             )}
+//             {activeTab === "govtInfo" && (
+//                <div className="govt-info">
+//                   <h2>Government Information</h2>
+//                   <p>
+//                      Here you can view government schemes and subsidies for
+//                      farmers.
+//                   </p>
+//                   <p>Check back soon for updates!</p>
+//                </div>
+//             )}
+//             {activeTab === "farmingTips" && (
+//                <div className="farming-tips">
+//                   <h2>Farming Tips</h2>
+//                   <p>Get the latest tips and tricks to improve your yield.</p>
+//                </div>
+//             )}
+//             {activeTab === "marketUpdates" && (
+//                <div className="market-updates">
+//                   <h2>Market Updates</h2>
+//                   <p>Stay updated with the latest market trends and prices.</p>
+//                </div>
+//             )}
+//          </div>
+//       </div>
+//    );
+// };
+
+// export default MyAccount;
 
 // ======================================================================og2================
 // import React, { useState } from "react";
