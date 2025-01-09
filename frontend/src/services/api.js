@@ -1,12 +1,44 @@
 // frontend/services/api.js
 import axios from "axios";
+import { rootAuthLoader } from "@clerk/react-router/ssr.server";
 
 const api = axios.create({ baseURL: "http://localhost:5000/api" });
-const API_URL = "http://localhost:5000/api";
+const Markteplace_API_URL = "http://localhost:5000/api/marketplacelistings";
 const CROPS_API_URL = "http://localhost:5000/api/crops";
 const DAILY_PRICE_REPORT_API_URL =
    "http://localhost:5000/api/daily-price-report";
 const SHORTAGES_API_URL = "http://localhost:5000/api/shortages";
+
+// Fetch Marketplace Listings
+export const getListings = async () => {
+   const response = await axios.get(`${Markteplace_API_URL}`);
+   return response.data;
+};
+// Post Shortages
+export const postListings = async (listing) => {
+   try {
+      const response = await fetch(
+         "http://localhost:5000/api/marketplacelistings",
+         {
+            method: "POST",
+            headers: {
+               "Content-Type": "application/json",
+            },
+            body: JSON.stringify(listing),
+         }
+      );
+
+      if (!response.ok) {
+         throw new Error("Failed to post new listing");
+      }
+
+      const data = await response.json(); // Parse response JSON
+      return { success: true, data }; // Wrap in success key for consistency
+   } catch (error) {
+      console.error("Error posting listing:", error);
+      return { success: false, error: error.message };
+   }
+};
 
 // Fetch Shortages
 export const getShortages = async () => {
@@ -52,16 +84,6 @@ export const postShortage = async (shortage) => {
       return { success: false, error: error.message };
    }
 };
-
-// // Fetch Marketplace Data
-// export const getMarketplaceListings = (filters) => {
-//    return axios.get(`${API_URL}/marketplace`, { params: filters });
-// };
-
-// // Post Listing to Marketplace
-// export const addMarketplaceListing = (listingData) => {
-//    return axios.post(`${API_URL}/marketplace`, listingData);
-// };
 
 // Fetch crops data
 export const getCrops = async () => {

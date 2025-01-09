@@ -1,7 +1,13 @@
+// frontend/src/pages/SignUp.js
 import React from "react";
+import { SignUp } from "@clerk/clerk-react";
 
-const SignUp = () => {
-   return <h1>Sign-Up</h1>;
+const SignUpPage = () => {
+   return (
+      <div>
+         <SignUp afterSignUpUrl="/my-account" />;
+      </div>
+   );
 };
 
-export default SignUp;
+export default SignUpPage;

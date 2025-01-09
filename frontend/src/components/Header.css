@@ -46,3 +46,86 @@
 .header nav ul li a:hover {
    text-decoration: underline;
 }
+
+/* Profile menu container */
+.profile-menu-container {
+   position: relative;
+}
+
+/* Profile icon */
+.profile-icon {
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+/* Profile menu dropdown */
+.profile-menu {
+   position: absolute;
+   top: 2.5rem;
+   right: 0;
+   background-color: #fff;
+   border: 1px solid #ddd;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   border-radius: 5px;
+   padding: 10px;
+   width: 200px;
+   z-index: 1000;
+   text-align: left;
+}
+
+/* User name */
+.profile-menu .user-name {
+   font-size: 1rem;
+   font-weight: bold;
+   margin-bottom: 10px;
+   color: #333;
+}
+
+/* Profile menu links */
+.profile-menu-link {
+   display: block;
+   padding: 8px;
+   color: #333;
+   text-decoration: none;
+   transition: background 0.2s;
+   font-size: 0.9rem;
+}
+
+.profile-menu-link:hover {
+   background-color: #f1f1f1;
+}
+
+/* Logout link */
+.logout {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   cursor: pointer;
+   color: red;
+   font-size: 0.9rem;
+}
+
+.logout:hover {
+   background-color: #ffe6e6;
+}
+/* Rounded buttons */
+.rounded-btn {
+   /* display: flex; */
+   padding: 8px 16px;
+   background-color: #009a4e;
+   color: white !important;
+   text-decoration: none;
+   border-radius: 20px;
+   font-size: 0.9rem;
+   font-weight: bold;
+   margin: 0 5px;
+   text-align: center;
+   text-shadow: none !important;
+   transition: background 0.2s;
+}
+
+.rounded-btn:hover {
+   background-color: #0056b3;
+}

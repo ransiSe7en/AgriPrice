@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@clerk/clerk-react": "^5.21.0",
+    "@clerk/clerk-sdk-node": "^5.1.4",
+    "@clerk/react-router": "^0.1.5"
+  }
 }

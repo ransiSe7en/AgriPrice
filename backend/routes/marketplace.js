@@ -12,97 +12,51 @@
 //    }
 // });
 
-// // Add a new marketplace listing
-// router.post("/", async (req, res) => {
-//    const { cropName, quantity, price, deliveryCost, contact } = req.body;
+// // // Get all listings
+// // router.get("/", async (req, res) => {
+// //    try {
+// //       const listings = await MarketplaceListing.find();
+// //       res.status(200).json(listings);
+// //    } catch (error) {
+// //       res.status(500).json({ error: "Failed to fetch listings" });
+// //    }
+// // });
 
-//    try {
-//       const newListing = new MarketplaceListing({
-//          cropName,
-//          quantity,
-//          price,
-//          deliveryCost,
-//          contact,
-//       });
+// // module.exports = router;
 
-//       await newListing.save();
-//       res.status(201).json(newListing);
-//    } catch (error) {
-//       res.status(500).json({ message: "Error creating listing", error });
-//    }
-// });
+// // const express = require("express");
+// // const router = express.Router();
+// // const MarketplaceListing = require("../models/MarketplaceListing");
 
-// module.exports = router;
+// // router.get("/", async (req, res) => {
+// //    const { sortBy, category, priceFrom, priceTo, city } = req.query;
 
-// const express = require("express");
-// const router = express.Router();
-// const MarketplaceListing = require("../models/MarketplaceListing");
+// //    const filters = {};
+// //    if (category) filters.category = category;
+// //    if (city && city !== "All of Sri Lanka") filters.location = city;
+// //    filters.price = { $gte: priceFrom || 0, $lte: priceTo || 10000 };
 
-// router.get("/", async (req, res) => {
-//    const { sortBy, category, priceFrom, priceTo, city } = req.query;
+// //    const sortOptions = {
+// //       newest: { createdAt: -1 },
+// //       oldest: { createdAt: 1 },
+// //       priceHigh: { price: -1 },
+// //       priceLow: { price: 1 },
+// //    };
 
-//    const filters = {};
-//    if (category) filters.category = category;
-//    if (city && city !== "All of Sri Lanka") filters.location = city;
-//    filters.price = { $gte: priceFrom || 0, $lte: priceTo || 10000 };
+// //    try {
+// //       const listings = await MarketplaceListing.find(filters).sort(
+// //          sortOptions[sortBy] || {}
+// //       );
+// //       res.json(listings);
+// //    } catch (error) {
+// //       res.status(500).send("Server Error");
+// //    }
+// // });
 
-//    const sortOptions = {
-//       newest: { createdAt: -1 },
-//       oldest: { createdAt: 1 },
-//       priceHigh: { price: -1 },
-//       priceLow: { price: 1 },
-//    };
-
-//    try {
-//       const listings = await MarketplaceListing.find(filters).sort(
-//          sortOptions[sortBy] || {}
-//       );
-//       res.json(listings);
-//    } catch (error) {
-//       res.status(500).send("Server Error");
-//    }
-// });
-
-// // Get all listings
-// router.get("/", async (req, res) => {
-//    try {
-//       const listings = await MarketplaceListing.find();
-//       res.status(200).json(listings);
-//    } catch (error) {
-//       res.status(500).json({ error: "Failed to fetch listings" });
-//    }
-// });
-
-// module.exports = router;
-
+//backend/routes/marketplace.js
 const express = require("express");
 const router = express.Router();
 const MarketplaceListing = require("../models/MarketplaceListing");
-
-// router.get("/", async (req, res) => {
-//    const { sortBy, category, priceFrom, priceTo, city } = req.query;
-
-//    const filters = {};
-//    if (category) filters.category = category;
-//    if (city && city !== "All of Sri Lanka") filters.location = city;
-//    filters.price = { $gte: priceFrom || 0, $lte: priceTo || 10000 };
-
-//    const sortOptions = {
-//       newest: { createdAt: -1 },
-//       oldest: { createdAt: 1 },
-//       priceHigh: { price: -1 },
-//       priceLow: { price: 1 },
-//    };
-
-//    try {
-//       const listings = await MarketplaceListing.find(filters).sort(
-//          sortOptions[sortBy] || {}
-//       );
-//       res.json(listings);
-//    } catch (error) {
-//       res.status(500).send("Server Error");
-//    }
-// });
 
 // Get all listings
 router.get("/", async (req, res) => {
@@ -110,7 +64,22 @@ router.get("/", async (req, res) => {
       const listings = await MarketplaceListing.find();
       res.status(200).json(listings);
    } catch (error) {
-      res.status(500).json({ error: "Failed to fetch listings" });
+      res.status(500).json({ error: "Failed to fetch listingssss" });
+   }
+});
+
+// POST route to create a marketplace listing
+router.post("/", async (req, res) => {
+   try {
+      const newListing = new MarketplaceListing(req.body);
+      await newListing.save();
+      res.status(201).json(newListing);
+   } catch (error) {
+      console.error("Error creating listing:", error);
+      res.status(500).json({
+         message: "Failed to create listing",
+         error: error.message,
+      });
    }
 });
 

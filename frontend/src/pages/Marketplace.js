@@ -247,30 +247,32 @@ const Marketplace = () => {
 
    useEffect(() => {
       // Fetch listings from the API
-      axios.get("http://localhost:5000/api/marketplace").then((response) => {
-         const data = response.data;
-         setListings(data);
-         setFilteredListings(data);
+      axios
+         .get("http://localhost:5000/api/marketplacelistings")
+         .then((response) => {
+            const data = response.data;
+            setListings(data);
+            setFilteredListings(data);
 
-         // Generate location list with counts dynamically
-         const locationMap = {};
-         data.forEach((listing) => {
-            if (!locationMap[listing.location])
-               locationMap[listing.location] = 0;
-            locationMap[listing.location]++;
+            // Generate location list with counts dynamically
+            const locationMap = {};
+            data.forEach((listing) => {
+               if (!locationMap[listing.location])
+                  locationMap[listing.location] = 0;
+               locationMap[listing.location]++;
+            });
+
+            const dynamicLocations = Object.entries(locationMap).map(
+               ([name, count]) => ({
+                  name,
+                  count,
+               })
+            );
+            setCities([
+               { name: "All of Sri Lanka", count: data.length },
+               ...dynamicLocations,
+            ]);
          });
-
-         const dynamicLocations = Object.entries(locationMap).map(
-            ([name, count]) => ({
-               name,
-               count,
-            })
-         );
-         setCities([
-            { name: "All of Sri Lanka", count: data.length },
-            ...dynamicLocations,
-         ]);
-      });
    }, []);
 
    const handleFilterChange = (filterName, value) => {
@@ -520,6 +522,9 @@ const Marketplace = () => {
                            <p>
                               <strong>Price:</strong> {listing.price} LKR
                            </p>
+                           {/* <p>
+                              <strong>By:</strong> {listing.author}
+                           </p> */}
                            <p>
                               <strong>Location:</strong> {listing.location}
                            </p>
