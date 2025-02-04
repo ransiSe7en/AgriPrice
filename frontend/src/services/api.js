@@ -5,6 +5,8 @@ import { rootAuthLoader } from "@clerk/react-router/ssr.server";
 const api = axios.create({ baseURL: "http://localhost:5000/api" });
 const Markteplace_API_URL = "http://localhost:5000/api/marketplacelistings";
 const CROPS_API_URL = "http://localhost:5000/api/crops";
+const API_URL = "http://localhost:5000/api";
+
 const DAILY_PRICE_REPORT_API_URL =
    "http://localhost:5000/api/daily-price-report";
 const SHORTAGES_API_URL = "http://localhost:5000/api/shortages";
@@ -14,6 +16,26 @@ export const getListings = async () => {
    const response = await axios.get(`${Markteplace_API_URL}`);
    return response.data;
 };
+
+export const getUserProducts = async (token, email) => {
+   const response = await fetch(
+      `http://localhost:5000/api/marketplacelistings?email=${email}`,
+      {
+         method: "GET",
+         headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+         },
+      }
+   );
+
+   if (!response.ok) {
+      throw new Error("Failed to fetch products");
+   }
+
+   return await response.json();
+};
+
 // Post Shortages
 export const postListings = async (listing) => {
    try {

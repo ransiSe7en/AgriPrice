@@ -19,16 +19,16 @@ const FarmerSchema = new mongoose.Schema({
       required: true,
    },
    selectedCrops: {
-      type: [String], // Array of crop names
+      type: [String],
       default: [],
    },
    alerts: {
       shortageAlerts: {
-         type: [String], // Array of crop names for shortage alerts
+         type: [String],
          default: [],
       },
       pricingAlerts: {
-         type: [String], // Array of crop names for pricing alerts
+         type: [String],
          default: [],
       },
    },

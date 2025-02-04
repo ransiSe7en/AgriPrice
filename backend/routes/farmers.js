@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Farmer = require("../models/Farmer"); // Your Farmer model
+const Farmer = require("../models/Farmer");
 
 // POST route to create a new farmer
 router.post("/", async (req, res) => {

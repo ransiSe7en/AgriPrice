@@ -1,6 +1,7 @@
 //frontend/src/pages/DailyPriceReport.js
 
 import React, { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 import "./DailyPriceReport.css";
 
 const DailyPriceReport = () => {
@@ -34,6 +35,50 @@ const DailyPriceReport = () => {
       setSearchQuery(event.target.value.toLowerCase());
    };
 
+   const handleUpdatePriceReport = () => {
+      Swal.fire({
+         title: "Upload Price Report",
+         input: "file",
+         inputAttributes: {
+            accept: ".pdf",
+            "aria-label": "Upload your price report PDF",
+         },
+         showCancelButton: true,
+         confirmButtonText: "Upload",
+         cancelButtonText: "Cancel",
+         preConfirm: (file) => {
+            if (!file) {
+               Swal.showValidationMessage("Please select a PDF file to upload");
+               return false;
+            }
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            return fetch("http://localhost:5000/api/upload", {
+               method: "POST",
+               body: formData,
+            })
+               .then((response) => {
+                  if (!response.ok) {
+                     throw new Error("Upload failed");
+                  }
+                  return response.json();
+               })
+               .catch((error) => {
+                  Swal.showValidationMessage(`Upload error: ${error.message}`);
+               });
+         },
+      }).then((result) => {
+         if (result.isConfirmed) {
+            Swal.fire(
+               "Success!",
+               "Price report uploaded successfully.",
+               "success"
+            );
+         }
+      });
+   };
    const renderTableRows = () => {
       if (!reportData || !Array.isArray(reportData)) {
          return (
@@ -70,38 +115,6 @@ const DailyPriceReport = () => {
          </tr>
       ));
    };
-
-   // const renderTableRows = () => {
-   //    if (!reportData || !Array.isArray(reportData.items)) {
-   //       return (
-   //          <tr>
-   //             <td colSpan="5">No data available</td>
-   //          </tr>
-   //       );
-   //    }
-
-   //    const filteredData = reportData.items.filter((item) =>
-   //       item.name.toLowerCase().includes(searchQuery)
-   //    );
-
-   //    if (filteredData.length === 0) {
-   //       return (
-   //          <tr>
-   //             <td colSpan="5">No items match the search query</td>
-   //          </tr>
-   //       );
-   //    }
-
-   //    return filteredData.map((item, index) => (
-   //       <tr key={index}>
-   //          <td>{item.name}</td>
-   //          <td>{item.wholesale?.Pettah?.[date] || "No price"}</td>
-   //          <td>{item.wholesale?.Dambulla?.[date] || "No price"}</td>
-   //          <td>{item.wholesale?.Narahenpita?.[date] || "No price"}</td>
-   //          <td>{item.unit}</td>
-   //       </tr>
-   //    ));
-   // };
 
    return (
       <div className="TodaysPricesBody">
@@ -144,7 +157,12 @@ const DailyPriceReport = () => {
                </button>
             </div>
          </div>
-
+         <button
+            onClick={handleUpdatePriceReport}
+            className="update-report-button"
+         >
+            Update Price Report
+         </button>
          <table>
             <thead>
                <tr>

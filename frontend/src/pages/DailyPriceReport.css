@@ -26,7 +26,7 @@
 
 /* Style for the buttons */
 button {
-   /* background-color: #009a4e; */
+   background-color: #fff;
    background-color: #fff;
    color: black;
    border: 2px solid #009a4e;
@@ -37,19 +37,18 @@ button {
    border-radius: 4px;
    font-weight: bold;
    transition: 500ms;
-
    /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
 }
 
 button:hover {
-   background-color: #cfdd66;
+   /* background-color: #cfdd66; */
    color: #000;
    /* text-shadow: 2px 2px 4px rgba(255, 255, 255, 1); */
    text-shadow: none;
 }
 .active-button {
-   background-color: #009a4e; /* Active background */
-   color: #fff; /* Active text color */
+   background-color: #009a4e;
+   color: #fff;
    text-shadow: none;
    /* text-shadow: 2px 2px 4px rgba(255, 255, 255, 1); */
    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);

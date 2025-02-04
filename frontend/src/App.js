@@ -11,6 +11,8 @@ import SignUpPage from "./pages/SignUp"; // Import SignUpPage
 import SignInPage from "./pages/SignIn"; // Import SignUpPage
 import MyAccount from "./pages/MyAccount";
 import AddProduct from "./pages/AddProduct";
+import EditProduct from "./pages/EditProduct";
+// import { useLocation, useNavigate } from "react-router-dom";
 
 function App() {
    return (
@@ -28,7 +30,12 @@ function App() {
                <Route path="/signup" element={<SignUpPage />} />
                <Route path="/signin" element={<SignInPage />} />
                <Route path="/my-account" element={<MyAccount />} />
+               {/* <Route
+                  path="/my-account"
+                  element={<MyAccount key={location.pathname} />} // Adding key prop here
+               /> */}
                <Route path="/add" element={<AddProduct />} />
+               <Route path="/edit-product/:id" element={<EditProduct />} />
             </Routes>
          </div>
       </Router>

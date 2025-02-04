@@ -14,7 +14,6 @@ const AddProduct = () => {
       price: "",
       category: "",
       location: "",
-      author: user?.firstName || "",
    });
 
    const [image, setImage] = useState(null);
@@ -37,6 +36,7 @@ const AddProduct = () => {
       if (image) {
          formData.append("image", image);
       }
+      formData.append("author", user?.emailAddresses[0]?.emailAddress || "");
 
       try {
          await axios.post(
@@ -89,13 +89,19 @@ const AddProduct = () => {
             </label>
             <label>
                Category:
-               <input
-                  type="text"
+               <select
                   name="category"
                   value={productForm.category}
                   onChange={handleFormChange}
                   required
-               />
+               >
+                  <option value="">Select a category</option>
+                  <option value="Vegetables">Vegetable</option>
+                  <option value="Fruits">Fruit</option>
+                  <option value="Rice">Rice</option>
+                  <option value="Fish">Fish</option>
+                  <option value="Other">Other</option>
+               </select>
             </label>
             <label>
                Location:
@@ -110,6 +116,15 @@ const AddProduct = () => {
             <label>
                Image:
                <input type="file" onChange={handleImageChange} />
+            </label>
+            <label>
+               Author
+               <input
+                  type="text"
+                  name="author"
+                  value={user?.emailAddresses[0]?.emailAddress || ""}
+                  disabled
+               />
             </label>
             <button type="submit">Submit Product</button>
             <button type="button" onClick={() => navigate("/my-account")}>

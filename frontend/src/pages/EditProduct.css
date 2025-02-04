@@ -1,0 +1,138 @@
+.edit-product-page {
+   max-width: 600px;
+   margin: 0 auto;
+   padding: 20px;
+   background-color: #f9f9f9;
+   border-radius: 8px;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   font-family: Arial, sans-serif;
+}
+
+.edit-product-page h2 {
+   text-align: center;
+   margin-bottom: 20px;
+   color: #333;
+}
+
+.edit-product-page form {
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+}
+
+.edit-product-page label {
+   font-weight: bold;
+   color: #555;
+}
+
+.edit-product-page input[type="text"],
+.edit-product-page input[type="number"],
+.edit-product-page input[type="file"],
+.edit-product-page textarea {
+   width: 100%;
+   padding: 10px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   font-size: 14px;
+   transition: border-color 0.3s;
+}
+
+.edit-product-page input[type="text"]:focus,
+.edit-product-page input[type="number"]:focus,
+.edit-product-page textarea:focus {
+   border-color: #007bff;
+   outline: none;
+}
+
+.edit-product-page textarea {
+   resize: vertical;
+   min-height: 80px;
+}
+
+.edit-product-page img {
+   display: block;
+   margin-top: 10px;
+   border: 1px solid #ddd;
+   border-radius: 4px;
+}
+
+.edit-product-page button {
+   padding: 10px 15px;
+   font-size: 16px;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   transition: background-color 0.3s;
+}
+
+.edit-product-page button[type="submit"] {
+   background-color: #007bff;
+   color: white;
+}
+
+.edit-product-page button[type="submit"]:hover {
+   background-color: #0056b3;
+}
+
+.edit-product-page button[type="button"] {
+   background-color: #6c757d;
+   color: white;
+}
+
+.edit-product-page button[type="button"]:hover {
+   background-color: #565e64;
+}
+
+.edit-product-page div p {
+   margin: 5px 0 10px;
+   color: #555;
+   font-size: 14px;
+}
+
+.edit-product-page div img {
+   max-width: 100px;
+   max-height: 100px;
+   object-fit: cover;
+   margin-top: 10px;
+}
+
+.current-image-container {
+   position: relative;
+   margin-top: 10px;
+}
+
+.image-wrapper {
+   position: relative;
+   display: inline-block;
+}
+
+.image-wrapper img {
+   display: block;
+   border: 1px solid #ddd;
+   border-radius: 4px;
+   width: 100px;
+   height: 100px;
+   object-fit: cover;
+}
+
+.remove-image-but {
+   position: absolute;
+   top: -5px;
+   right: -5px;
+   background-color: #ff4d4d;
+   color: white;
+   border: none;
+   border-radius: 50%;
+   width: 20px;
+   height: 20px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 14px;
+   cursor: pointer;
+   transition: background-color 0.3s;
+}
+
+.remove-image-but:hover {
+   background-color: #e60000;
+}

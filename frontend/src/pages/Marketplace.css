@@ -78,6 +78,7 @@
    flex-grow: 1;
    padding: 8px 15px;
    border: 1px solid #ddd;
+   color: black;
    border-radius: 4px;
    background-color: #fff;
    cursor: pointer;
@@ -88,13 +89,13 @@
 }
 
 .filter-section .categories button.active {
-   background-color: #007bff;
+   background-color: #009a4e;
    color: #fff;
    border-color: #007bff;
 }
 
 .filter-section .categories button:hover {
-   background-color: #007bff;
+   background-color: #009a4e;
    color: #fff;
    border-color: #007bff;
 }
@@ -168,12 +169,15 @@
 
 .image-box:hover {
    opacity: 0.8;
+   border-radius: 0px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 .image-box.active {
    border: 3px solid #009a4e;
    width: 45px;
    height: 45px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 /* .image-boxes {

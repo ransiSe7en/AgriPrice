@@ -128,10 +128,14 @@
 .profile-menu-link {
    display: block;
    padding: 8px;
-   color: #333;
+   color: #000 !important;
    text-decoration: none;
    transition: background 0.2s;
-   font-size: 0.9rem;
+   font-size: 1rem !important;
+   font-family: sans-serif !important;
+   background-color: darkseagreen;
+   border: 2px dotted black;
+   margin-bottom: 10px !important;
 }
 
 .profile-menu-link:hover {
@@ -146,6 +150,8 @@
    cursor: pointer;
    color: red;
    font-size: 0.9rem;
+   padding: 0px !important;
+   /* margin: 5px auto !important; */
 }
 
 .logout:hover {

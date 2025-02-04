@@ -236,10 +236,13 @@ const Header = () => {
                            <Link to="/my-account" className="profile-menu-link">
                               Account Details
                            </Link>
-                           <Link to="/my-orders" className="profile-menu-link">
-                              My Orders
+                           <Link
+                              to="/my-account/my-products"
+                              className="profile-menu-link"
+                           >
+                              My Products
                            </Link>
-                           <div className="profile-menu-link logout">
+                           <div className="logout">
                               <SignOutButton>
                                  <button>
                                     <FontAwesomeIcon icon={faSignOutAlt} />{" "}

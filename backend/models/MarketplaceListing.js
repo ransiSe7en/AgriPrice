@@ -7,7 +7,7 @@ const marketplaceListingSchema = new mongoose.Schema({
    category: { type: String, required: true },
    location: { type: String, required: true },
    createdAt: { type: Date, default: Date.now },
-   author: { type: String, required: false },
+   author: { type: String, required: true },
    image: { type: String, required: false },
 });
 

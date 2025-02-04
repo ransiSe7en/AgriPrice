@@ -1,12 +1,12 @@
 // backend/routes/dailypricereport.js
 const express = require("express");
 const router = express.Router();
-const DailyPriceReport = require("../models/DailyPriceReport"); // Path to your Mongoose model
+const DailyPriceReport = require("../models/DailyPriceReport");
 
 // GET route to fetch the latest daily price report
 router.get("/", async (req, res) => {
    try {
-      const report = await DailyPriceReport.findOne().sort({ date: -1 }); // or any other query based on your use case
+      const report = await DailyPriceReport.findOne().sort({ date: -1 });
       res.json(report);
    } catch (error) {
       res.status(500).json({ message: "Server error" });

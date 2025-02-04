@@ -365,7 +365,7 @@ const Marketplace = () => {
          setFilters((prevFilters) => ({
             ...prevFilters,
             item: "",
-            category: "",
+            category: "All",
          }));
       } else {
          setActiveItem(item);
@@ -522,6 +522,9 @@ const Marketplace = () => {
                            />
                            <h3>{listing.title}</h3>
                            <p>{listing.description}</p>
+                           <p>
+                              <strong>Category</strong> {listing.category}
+                           </p>
                            <p>
                               <strong>Price:</strong> {listing.price} LKR
                            </p>

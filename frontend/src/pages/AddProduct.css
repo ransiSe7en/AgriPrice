@@ -1,41 +1,65 @@
 .add-product-page {
-   padding: 20px;
    max-width: 600px;
-   margin: auto;
+   margin: 0 auto;
+   padding: 20px;
+   background-color: #f9f9f9;
+   border-radius: 8px;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-form {
+   display: flex;
+   flex-direction: column;
 }
 
 .product-form label {
-   display: block;
-   margin: 10px 0;
+   margin-bottom: 10px;
+   font-weight: 500;
 }
 
-.product-form input,
-.product-form textarea {
-   width: 100%;
+.product-form input[type="text"],
+.product-form input[type="number"],
+.product-form textarea,
+.product-form select {
    padding: 10px;
-   margin-top: 5px;
    border: 1px solid #ccc;
-   border-radius: 5px;
+   border-radius: 4px;
+   font-size: 16px;
+   width: 100%;
+   box-sizing: border-box;
+   transition: border-color 0.3s ease;
 }
 
-.product-form button {
-   margin: 10px 5px 0 0;
-   padding: 10px 20px;
+.product-form input[type="text"]:focus,
+.product-form input[type="number"]:focus,
+.product-form textarea:focus,
+.product-form select:focus {
+   border-color: #007bff;
+   outline: none;
+}
+
+button[type="submit"],
+button[type="button"] {
+   padding: 12px;
    background-color: #28a745;
    color: white;
    border: none;
-   border-radius: 5px;
+   border-radius: 4px;
    cursor: pointer;
+   font-size: 16px;
+   margin-top: 10px;
+   transition: background-color 0.3s ease;
 }
 
-.product-form button:hover {
+button[type="submit"]:hover,
+button[type="button"]:hover {
    background-color: #218838;
 }
 
-.product-form .cancel-btn {
-   background-color: #dc3545;
+button[type="button"] {
+   background-color: #6c757d;
 }
 
-.product-form .cancel-btn:hover {
-   background-color: #c82333;
+button[type="button"]:hover {
+   background-color: #5a6268;
 }
