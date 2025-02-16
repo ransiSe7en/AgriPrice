@@ -76,6 +76,7 @@ const DailyPriceReport = () => {
                "Price report uploaded successfully.",
                "success"
             );
+            window.location.reload(); // Refresh to fetch updated data
          }
       });
    };
@@ -95,6 +96,11 @@ const DailyPriceReport = () => {
                item.name.toLowerCase().includes(searchQuery)
             ) || []
       );
+
+      // const filteredData =
+      //    reportData?.wholesale_prices?.vegetables?.filter((item) =>
+      //       item.name.toLowerCase().includes(searchQuery)
+      //    ) || [];
 
       if (filteredData.length === 0) {
          return (

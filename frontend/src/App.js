@@ -12,6 +12,8 @@ import SignInPage from "./pages/SignIn"; // Import SignUpPage
 import MyAccount from "./pages/MyAccount";
 import AddProduct from "./pages/AddProduct";
 import EditProduct from "./pages/EditProduct";
+import HowItWorks from "./pages/HowItWorks";
+import WeatherForecast from "./pages/WeatherForecast";
 // import { useLocation, useNavigate } from "react-router-dom";
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
                   element={<DailyPriceReport />}
                />
                <Route path="/shortages" element={<Shortages />} />
+               <Route path="/weather-forecast" element={<WeatherForecast />} />
+               <Route path="/how-it-works" element={<HowItWorks />} />
                <Route path="/signup" element={<SignUpPage />} />
                <Route path="/signin" element={<SignInPage />} />
                <Route path="/my-account" element={<MyAccount />} />

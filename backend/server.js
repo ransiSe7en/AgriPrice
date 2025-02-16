@@ -125,6 +125,7 @@
 // app.listen(PORT, () =>
 //    console.log(`Server running on http://localhost:${PORT}`)
 // );
+// const uploadRoute = require("./routes/upload");
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -143,6 +144,8 @@ const MarketplaceListing = require("./models/MarketplaceListing");
 // Middleware
 app.use(cors());
 app.use(express.json());
+// const uploadRoutes = require("./routes/upload");
+// app.use("/api", uploadRoutes);
 app.use("/uploads", express.static("uploads"));
 
 // Connect to MongoDB
